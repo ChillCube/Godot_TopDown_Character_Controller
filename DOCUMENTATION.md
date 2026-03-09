@@ -6,5 +6,14 @@ A character controller for top down movement, such as for an RPG game
 ## Class: TopDownCharacter
 
 
+### ⚙️ Inspector Variables
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| **--- DASH ---** | | | |
+| **--- KNOCKBACK ---** | | | |
+| **--- CONTROLS ---** | | | |
+| **--- KEYBOARD ---** | | | |
+| **--- CONTROLLER ---** | | | |
+
 ---
 
