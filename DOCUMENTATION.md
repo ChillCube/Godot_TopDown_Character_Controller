@@ -3,15 +3,7 @@ Generated: 2026-03-09
 
 A character controller for top down movement, such as for an RPG game
 
-### 📦 Dependencies
-| Source | Reference | Repository |
-| :--- | :--- | :--- |
-| Code | [`SmoothMovement`](https://github.com/ChillCube/Godot_SmoothMovement/blob/main/DOCUMENTATION.md#class-smoothmovement) | [Repo](https://github.com/ChillCube/Godot_SmoothMovement) |
-
----
-
 ## Class: TopDownCharacter
-**Inherits:** [`CharacterBody2D`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html)
 
 
 ### Properties
@@ -46,22 +38,22 @@ A character controller for top down movement, such as for an RPG game
 ### Signals
 | Signal | Description |
 | :--- | :--- |
-| **moving** |  emitted when the character moves, returns direction and speed as a single vector (length = speed) |
-| **started_dashing** |  emitted when the character is dashing. Returns directiona nd speed as a single vector (length = speed) |
-| **used_a_dash** |  emitted when the character dashes. Returns the amount of dashes left and the maximum dashes |
-| **stopped_dashing** |  emitted when the character stops dashing |
-| **moving_up** |  emitted when the character moves up / north |
-| **moving_down** |  emitted when the character moves down / south |
-| **moving_left** |  emitted when the character moves left / west |
-| **moving_right** |  emitted when the character moves right / east |
-| **stopped_moving** |  emitted when the character stops moving |
-| **knocked_back** |  emitted when the character is knocked back (return direction and strength) |
-| **knockback_stopped** |  emitted when the characters knockback stopped |
+| `moving(direction_and_speed : Vector2)` |  emitted when the character moves, returns direction and speed as a single vector (length = speed) |
+| `started_dashing(direction_and_speed : Vector2)` |  emitted when the character is dashing. Returns directiona nd speed as a single vector (length = speed) |
+| `used_a_dash(dashes_left : int, dashes_used : int, max_dashes : int)` |  emitted when the character dashes. Returns the amount of dashes left and the maximum dashes |
+| `stopped_dashing` |  emitted when the character stops dashing |
+| `moving_up` |  emitted when the character moves up / north |
+| `moving_down` |  emitted when the character moves down / south |
+| `moving_left` |  emitted when the character moves left / west |
+| `moving_right` |  emitted when the character moves right / east |
+| `stopped_moving` |  emitted when the character stops moving |
+| `knocked_back(direction : Vector2 , strength : float)` |  emitted when the character is knocked back (return direction and strength) |
+| `knockback_stopped` |  emitted when the characters knockback stopped |
 
 ### Methods
 | Method | Returns | Description |
 | :--- | :--- | :--- |
-| **knockback()** | `void` |  This can be used by other nodes to start knockback |
+| **knockback(direction: Vector2, strength : float) -> void:** | `void` |  This can be used by other nodes to start knockback |
 
 ---
 
