@@ -38,22 +38,22 @@ A character controller for top down movement, such as for an RPG game
 ### Signals
 | Signal | Arguments | Description |
 | :--- | :--- | :--- |
-| **moving** | <small>`direction_and_speed : Vector2`</small> |  emitted when the character moves, returns direction and speed as a single vector (length = speed) |
-| **started_dashing** | <small>`direction_and_speed : Vector2`</small> |  emitted when the character is dashing. Returns directiona nd speed as a single vector (length = speed) |
-| **used_a_dash** | <small>`dashes_left : int<br>dashes_used : int<br>max_dashes : int`</small> |  emitted when the character dashes. Returns the amount of dashes left and the maximum dashes |
-| **stopped_dashing** | <small>`-`</small> |  emitted when the character stops dashing |
-| **moving_up** | <small>`-`</small> |  emitted when the character moves up / north |
-| **moving_down** | <small>`-`</small> |  emitted when the character moves down / south |
-| **moving_left** | <small>`-`</small> |  emitted when the character moves left / west |
-| **moving_right** | <small>`-`</small> |  emitted when the character moves right / east |
-| **stopped_moving** | <small>`-`</small> |  emitted when the character stops moving |
-| **knocked_back** | <small>`direction : Vector2 <br>strength : float`</small> |  emitted when the character is knocked back (return direction and strength) |
-| **knockback_stopped** | <small>`-`</small> |  emitted when the characters knockback stopped |
+| **moving** | `direction_and_speed : Vector2` |  emitted when the character moves, returns direction and speed as a single vector (length = speed) |
+| **started_dashing** | `direction_and_speed : Vector2` |  emitted when the character is dashing. Returns directiona nd speed as a single vector (length = speed) |
+| **used_a_dash** | `dashes_left : int`<br>`dashes_used : int`<br>`max_dashes : int` |  emitted when the character dashes. Returns the amount of dashes left and the maximum dashes |
+| **stopped_dashing** | - |  emitted when the character stops dashing |
+| **moving_up** | - |  emitted when the character moves up / north |
+| **moving_down** | - |  emitted when the character moves down / south |
+| **moving_left** | - |  emitted when the character moves left / west |
+| **moving_right** | - |  emitted when the character moves right / east |
+| **stopped_moving** | - |  emitted when the character stops moving |
+| **knocked_back** | `direction : Vector2 `<br>`strength : float` |  emitted when the character is knocked back (return direction and strength) |
+| **knockback_stopped** | - |  emitted when the characters knockback stopped |
 
 ### Methods
 | Method | Arguments | Returns | Description |
 | :--- | :--- | :--- | :--- |
-| **knockback()** | <small>`direction: Vector2<br>strength : float`</small> | `void` |  This can be used by other nodes to start knockback |
+| **knockback()** | `direction: Vector2`<br>`strength : float` | `void` |  This can be used by other nodes to start knockback |
 
 ---
 
