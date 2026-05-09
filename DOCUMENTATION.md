@@ -1,5 +1,5 @@
 # Godot_TopDown_Character_Controller API Reference
-Generated: 2026-03-10
+Generated: 2026-05-09
 
 A character controller for top down movement, such as for an RPG game
 
