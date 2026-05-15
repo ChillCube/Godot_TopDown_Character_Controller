@@ -162,9 +162,10 @@ func _physics_process(delta: float):
 	input_vector.x = Input.get_action_strength(input_right) - Input.get_action_strength(input_left)
 	input_vector.y = Input.get_action_strength(input_down) - Input.get_action_strength(input_up)
 	
-	var joy_stick_strength : Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_LEFT_X), Input.get_joy_axis(0, JOY_AXIS_LEFT_Y))
-	if joy_stick_strength.length() > deadzone:
-		input_vector = joy_stick_strength
+	if Input.get_connected_joypads().size() > 0:
+		var joy_stick_strength : Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_LEFT_X), Input.get_joy_axis(0, JOY_AXIS_LEFT_Y))
+		if joy_stick_strength.length() > deadzone:
+			input_vector = joy_stick_strength
 	
 	input_vector = input_vector.normalized()
 	_last_input_vector = input_vector
@@ -229,4 +230,3 @@ func _on_knocked_back(direction: Vector2, strength: float):
 
 func _on_knockback_stopped():
 	emit_signal("knockback_stopped")
-
