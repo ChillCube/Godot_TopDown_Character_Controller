@@ -1,4 +1,1 @@
-# --- Automated Dependencies (Managed by Script) ---
-
-# --- Manual Dependencies (Do Not Delete) ---
-# Add non-Godot dependencies below
+https://github.com/ChillCube/TopDownMovement
