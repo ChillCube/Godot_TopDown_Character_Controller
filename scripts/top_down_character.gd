@@ -52,6 +52,9 @@ var knockback_vector : Vector2 = Vector2.ZERO
 @export_group("Controller")
 @export var deadzone : float = 0.1
 
+# New variable to control if this character accepts player input
+@export var is_player : bool = true
+
 var speed_vector : Vector2 = Vector2(0,0);
 var acceleration_vector : Vector2 = Vector2.ZERO
 
@@ -97,7 +100,8 @@ func _physics_process(delta: float) -> void:
 	#region GET DIRECTIONAL INPUTS
 	var input_vector : Vector2 = Vector2.ZERO
 	
-	if not _is_in_multiplayer or _is_local_player:
+	# Only get input if this is a player-controlled character
+	if is_player and (not _is_in_multiplayer or _is_local_player):
 		input_vector.x = Input.get_action_strength(input_right) - Input.get_action_strength(input_left)
 		input_vector.y = Input.get_action_strength(input_down) - Input.get_action_strength(input_up)
 		
@@ -115,7 +119,8 @@ func _physics_process(delta: float) -> void:
 	
 	#region DASH
 	if enable_dashing:
-		if not _is_in_multiplayer or _is_local_player:
+		# Only allow dash input if this is a player character
+		if is_player and (not _is_in_multiplayer or _is_local_player):
 			if Input.is_action_just_pressed(input_dash):
 				if _is_in_multiplayer:
 					rpc("_try_dash", input_vector)
@@ -170,6 +175,10 @@ func _process(delta: float) -> void:
 		position = position.lerp(_net_position, delta * remote_lerp_speed)
 
 func _try_dash_singleplayer(input_vector: Vector2):
+	# Prevent NPCs from dashing
+	if not is_player:
+		return
+		
 	if dash_timeout_timer.time_left < 0.1:
 		dashes_used = 0;
 	
@@ -183,6 +192,10 @@ func _try_dash_singleplayer(input_vector: Vector2):
 
 @rpc("any_peer", "reliable", "call_local")
 func _try_dash(input_vector: Vector2):
+	# Prevent NPCs from initiating dash through RPC
+	if not is_player:
+		return
+		
 	if not _is_in_multiplayer:
 		return
 	
