@@ -229,3 +229,4 @@ func _on_knocked_back(direction: Vector2, strength: float):
 
 func _on_knockback_stopped():
 	emit_signal("knockback_stopped")
+
