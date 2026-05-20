@@ -16,90 +16,90 @@ signal stopped_moving
 signal knocked_back(direction : Vector2 , strength : float)
 signal knockback_stopped
 
-@export var speed : float = 500:
+@export var speed : float = 500: ## Maximum movement speed in pixels/sec
 	set(value):
 		speed = value
 		if _movement:
 			_movement.speed = value
-@export_range(0, 1) var acceleration : float = 1:
+@export_range(0, 1) var acceleration : float = 1: ## How quickly the character ramps up to full speed (1 = instant)
 	set(value):
 		acceleration = value
 		if _movement:
 			_movement.acceleration = value
-@export_range(0, 1) var deceleration : float = 0.1:
+@export_range(0, 1) var deceleration : float = 0.1: ## How quickly the character slows to a stop (1 = instant)
 	set(value):
 		deceleration = value
 		if _movement:
 			_movement.deceleration = value
 
 @export_group("Dash")
-@export var enable_dashing : bool = true:
+@export var enable_dashing : bool = true: ## Allow the character to dash
 	set(value):
 		enable_dashing = value
 		if _movement:
 			_movement.enable_dashing = value
-@export var dash_speed : float = 5:
+@export var dash_speed : float = 5: ## Speed multiplier applied during a dash
 	set(value):
 		dash_speed = value
 		if _movement:
 			_movement.dash_speed = value
-@export var dash_time : float = 0.5:
+@export var dash_time : float = 0.5: ## Duration in seconds of a single dash
 	set(value):
 		dash_time = value
 		if _movement:
 			_movement.dash_time = value
-@export_range(0, 1) var dash_falloff : float = 0.3:
+@export_range(0, 1) var dash_falloff : float = 0.3: ## How quickly dash velocity decays after the timer ends
 	set(value):
 		dash_falloff = value
 		if _movement:
 			_movement.dash_falloff = value
-@export var dash_timeout : float = 0.5:
+@export var dash_timeout : float = 0.5: ## Cooldown in seconds between consecutive dashes
 	set(value):
 		dash_timeout = value
 		if _movement:
 			_movement.dash_timeout = value
-@export var dashes : int = 1:
+@export var dashes : int = 1: ## How many dashes the character can perform before the cooldown resets
 	set(value):
 		dashes = value
 		if _movement:
 			_movement.dashes = value
 
 @export_group("Knockback")
-@export var enable_knockback : bool = true:
+@export var enable_knockback : bool = true: ## Allow the character to be knocked back by apply_knockback()
 	set(value):
 		enable_knockback = value
 		if _movement:
 			_movement.enable_knockback = value
-@export var knockback_speed : float = 5:
+@export var knockback_speed : float = 5: ## Speed multiplier for knockback velocity
 	set(value):
 		knockback_speed = value
 		if _movement:
 			_movement.knockback_speed = value
-@export var knockback_time : float = 0.5:
+@export var knockback_time : float = 0.5: ## Duration in seconds that knockback is applied
 	set(value):
 		knockback_time = value
 		if _movement:
 			_movement.knockback_time = value
-@export_range(0, 1) var knockback_falloff : float = 0.3:
+@export_range(0, 1) var knockback_falloff : float = 0.3: ## How quickly knockback velocity decays after the timer ends
 	set(value):
 		knockback_falloff = value
 		if _movement:
 			_movement.knockback_falloff = value
 
 @export_category("Controls")
-@export var input_dash : String = "dash"
+@export var input_dash : String = "dash" ## Input action name for dashing
 
 @export_group("Keyboard")
-@export var input_left : String = "ui_left"
-@export var input_right : String = "ui_right"
-@export var input_down : String = "ui_down"
-@export var input_up : String = "ui_up"
+@export var input_left : String = "ui_left" ## Input action name for moving left
+@export var input_right : String = "ui_right" ## Input action name for moving right
+@export var input_down : String = "ui_down" ## Input action name for moving down
+@export var input_up : String = "ui_up" ## Input action name for moving up
 
 @export_group("Controller")
-@export var deadzone : float = 0.1
+@export var deadzone : float = 0.1 ## Analog stick dead zone to ignore drift
 
 @export_group("Multiplayer")
-@export_range(1.0, 30.0, 0.5) var remote_lerp_speed : float = 15.0:
+@export_range(1.0, 30.0, 0.5) var remote_lerp_speed : float = 15.0: ## Lerp speed used to interpolate remote player positions on non-authority clients
 	set(value):
 		remote_lerp_speed = value
 		if _movement:
@@ -111,7 +111,7 @@ var _movement : TopDownMovement
 # Local input state
 var _last_input_vector : Vector2 = Vector2.ZERO
 
-func _ready():
+func _ready(): ## Creates the TopDownMovement component, connects its signals, and sets multiplayer authority from node name
 	_create_movement_component()
 	_connect_signals()
 	
@@ -181,19 +181,19 @@ func _physics_process(delta: float):
 		_movement.request_dash(input_vector)
 
 # Public API for external control (NPCs, AI, State Machines)
-func set_movement_override(direction: Vector2):
+func set_movement_override(direction: Vector2): ## External API (AI/NPC): push a movement direction without needing input
 	if _movement:
 		_movement.request_movement(direction)
 
-func clear_movement_override():
+func clear_movement_override(): ## External API: stop any override-driven movement
 	if _movement:
 		_movement.request_movement(Vector2.ZERO)
 
-func try_dash(direction: Vector2) -> void:
+func try_dash(direction: Vector2) -> void: ## External API: trigger a dash in the given direction (e.g. from AI or state machine)
 	if _movement:
 		_movement.request_dash(direction)
 
-func apply_knockback(direction: Vector2, strength: float):
+func apply_knockback(direction: Vector2, strength: float): ## External API: apply knockback to the character (direction is normalized internally)
 	if _movement:
 		_movement.request_knockback(direction, strength)
 
