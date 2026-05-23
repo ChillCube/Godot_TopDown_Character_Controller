@@ -1,2 +1,3 @@
-https://github.com/ChillCube/TopDownMovement
-# Updated: 2026-05-15
+# --- Automated Dependencies (Managed by Script) ---
+
+# --- Manually Add Dependencies Here  ---
