@@ -177,7 +177,7 @@ func _physics_process(delta: float):
 		_movement.request_movement(Vector2.ZERO)
 	
 	# Handle dash
-	if enable_dashing and Input.is_action_just_pressed(input_dash):
+	if enable_dashing and InputMap.has_action(input_dash) and Input.is_action_just_pressed(input_dash):
 		_movement.request_dash(input_vector)
 
 # Public API for external control (NPCs, AI, State Machines)
