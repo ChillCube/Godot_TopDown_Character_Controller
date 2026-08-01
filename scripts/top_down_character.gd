@@ -32,6 +32,12 @@ signal knockback_stopped
 		if _movement:
 			_movement.deceleration = value
 
+@export var enable_walking : bool = true: ## Allow the character to walk via input
+	set(value):
+		enable_walking = value
+		if _movement:
+			_movement.enable_walking = value
+
 @export_group("Dash")
 @export var enable_dashing : bool = true: ## Allow the character to dash
 	set(value):
@@ -128,6 +134,7 @@ func _create_movement_component():
 	_movement.speed = speed
 	_movement.acceleration = acceleration
 	_movement.deceleration = deceleration
+	_movement.enable_walking = enable_walking
 	_movement.enable_dashing = enable_dashing
 	_movement.dash_speed = dash_speed
 	_movement.dash_time = dash_time
